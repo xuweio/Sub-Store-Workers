@@ -56,6 +56,7 @@ jobs:
           key: version-cache-${{ github.ref_name }}-${{ github.run_id }}
           restore-keys: |
             version-cache-${{ github.ref_name }}-
+          submodules: 'recursive'
 
       - name: Check for New Releases
         id: check
