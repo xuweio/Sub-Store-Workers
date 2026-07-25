@@ -137,7 +137,12 @@ export default function getParser() {
                 }
             }
 
-            if (id.includes('sub-store/backend/src/core/proxy-utils/parsers/peggy/')) {
+            // Upstream keeps both Peggy grammars and already-compiled handwritten
+            // parsers in this directory. Only grammar-backed modules need compiling.
+            if (
+                id.includes('sub-store/backend/src/core/proxy-utils/parsers/peggy/')
+                && /const\s+grammars\s*=\s*String\.raw`/.test(contents)
+            ) {
                 contents = precompilePeggyParser(contents, id, this);
             }
 
